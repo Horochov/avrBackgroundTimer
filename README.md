@@ -1,4 +1,4 @@
-# avrBackgroundTimer
+# elapsedTime
 This code implements arduino-like millis() functions, written in clear C and tested on atmega328.
 
 
