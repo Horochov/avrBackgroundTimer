@@ -1,14 +1,14 @@
 /*
- * elapsedTimeMs.c
+ * elapsedTime.c
  *
- *  Created on: 21 paü 2018
+ *  Created on: 21.10.2018
  *      Author: HorochovPL
  */
 #include <stdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include "avrBackgroundTimer.h"
+#include "elapsedTime.h"
 
 
 

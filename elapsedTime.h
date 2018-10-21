@@ -1,12 +1,12 @@
 /*
- * masterTimer.h
+ * elapsedTime.h
  *
- *  Created on: 21 paü 2018
+ *  Created on: 21.10.2018
  *      Author: HorochovPL
  */
 
-#ifndef AVRBACKGROUNDTIMER_H_
-#define AVRBACKGROUNDTIMER_H_
+#ifndef ELAPSEDTIME_H_
+#define ELAPSEDTIME_H_
 
 
 #ifdef TIMER0_IN_USE
@@ -29,4 +29,4 @@ uint32_t timer_getSec(void);
 
 
 
-#endif /* AVRBACKGROUNDTIMER_H_ */
+#endif /* ELAPSEDTIME_H_ */
