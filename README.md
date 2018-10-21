@@ -23,6 +23,8 @@ Returns time in microsecounds since init or reset call. Also callable by alias `
 
 This function uses timer register TIFRx to get relatively high accouracy without spamming with interrupts.
 
+Lowest accouracy is something like 8us, will depend on F_CPU like this: `1/((F_CPU/1000/64)-1)`
+
 Copied from arduino source.
 
 
