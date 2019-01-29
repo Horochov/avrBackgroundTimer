@@ -13,6 +13,10 @@
 
 
 static volatile uint32_t elapsedTimeMs;
+#ifdef TIMER_ENABLE_CALLBACK
+static /*volatile*/ void (*function)(void);
+static volatile unsigned int functionWaitTime, functionWaitTimeMax;
+#endif
 
 //interrupt every 1ms. Feel free to add your code here
 ISR(TIMER0_COMPA_vect)
@@ -20,7 +24,28 @@ ISR(TIMER0_COMPA_vect)
 	//H3H3, it's shorter than an arduino interrupt.
 	elapsedTimeMs++;
 
+#ifdef TIMER_ENABLE_CALLBACK
+	if(function)
+		if(++functionWaitTime >= functionWaitTimeMax)
+		{
+			function();
+			functionWaitTime=0;
+		}
+#endif
 }
+
+#ifdef TIMER_ENABLE_CALLBACK
+/*
+ * Pass function which will be called every 1ms from interrupt.
+ * Don't make it too long to process!
+ */
+void timer_registerCallback(void(*fun)(void), unsigned int waitTimeMs)
+{
+	function=fun;
+	functionWaitTimeMax=waitTimeMs;
+
+}
+#endif
 
 void timer_enable()
 {
@@ -86,6 +111,9 @@ uint32_t timer_getSec(void)
 	return elapsedTimeMs*0.001;
 }
 
+/*
+ * If it doesn't work, maybe you've forgotten about sei()?
+ */
 void timer_init(void)
 {
 	TCCR0A=(1<<WGM01);
