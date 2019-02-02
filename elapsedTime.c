@@ -24,17 +24,17 @@ ISR(TIMER0_COMPA_vect)
 	//H3H3, it's shorter than an arduino interrupt.
 	elapsedTimeMs++;
 
-#ifdef TIMER_ENABLE_CALLBACK
+#if TIMER_ENABLE_CALLBACK>0
 	if(function)
 		if(++functionWaitTime >= functionWaitTimeMax)
 		{
-			function();
+			(*function)();
 			functionWaitTime=0;
 		}
 #endif
 }
 
-#ifdef TIMER_ENABLE_CALLBACK
+#if TIMER_ENABLE_CALLBACK>0
 /*
  * Pass function which will be called every 1ms from interrupt.
  * Don't make it too long to process!
